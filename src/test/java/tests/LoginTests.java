@@ -2,6 +2,7 @@ package tests;
 //leya@bach.com
 //leyaBach9!
 
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -45,6 +46,16 @@ public class LoginTests extends TestBase {
         app.getHelperUser().submitLogin();
 
      Assert.assertTrue(app.getHelperUser().isLogged());
+    }
+    @Test
+    public void loginSuccess1() {
+        User user = new User().setEmail("leya@bach.com").setPassword("leyaBach9!");
+
+        app.getHelperUser().openLogRegForm();
+        app.getHelperUser().fillLogRegForm(user);
+        app.getHelperUser().submitLogin();
+
+        Assert.assertTrue(app.getHelperUser().isLogged());
     }
   //  =============================== Negative =================
     @Test
