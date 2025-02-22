@@ -6,12 +6,12 @@ public class User {
 
 
 
-    public User setEmail(String email) {
+    public User setEmail(String email) { // User withEmail - optional type
         this.email = email;
         return this;
     }
 
-    public  User setPassword(String password) {
+    public  User setPassword(String password) { //User withPassword
         this.password = password;
         return this;
     }

@@ -51,7 +51,8 @@ public class HelperBase {
         // type into alert --> alert.sendKeys("hello");
         Alert alert = new WebDriverWait(wd, Duration.ofSeconds(10))
                 .until(ExpectedConditions.alertIsPresent());
-        if (alert != null && alert.getText().contains(message)){
+        if (alert != null && alert.getText().contains(message)){  //если надо точное совпадение текска
+            // алерта то   .equals(message)
             pause(5000);
             alert.accept();
             return true;

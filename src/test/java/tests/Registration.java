@@ -31,17 +31,18 @@ public class Registration extends TestBase {
         app.getHelperUser().submitReg();
 
         Assert.assertTrue(app.getHelperUser().isLogged());
+        Assert.assertTrue(app.getHelperUser().isNoContactsHereDisplayed());
 
     }
 //=============== negative ====================
     @Test
+    //@Test (description = "Bug report 12345",enabled=false)   <---- to make method invisible while
+    // waiting for bug resolution
+
     public void regWrongEmail() {
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        System.out.println(i);
 
         User user = new User()
-                .setEmail("green" + i + "email.com")
+                .setEmail("greenemail.com")
                 .setPassword("Green123456!");
 
         app.getHelperUser().openLogRegForm();
@@ -52,12 +53,9 @@ public class Registration extends TestBase {
     }
     @Test
     public void regWrongPassword() {
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        System.out.println(i);
 
         User user = new User()
-                .setEmail("green" + i + "@email.com")
+                .setEmail("green@email.com")
                 .setPassword("Green!");
 
         app.getHelperUser().openLogRegForm();
@@ -68,9 +66,6 @@ public class Registration extends TestBase {
     }
     @Test
     public void regEmptyEmail() {
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        System.out.println(i);
 
         User user = new User()
                 .setEmail("")
@@ -84,12 +79,9 @@ public class Registration extends TestBase {
     }
     @Test
     public void regEmptyPassword() {
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        System.out.println(i);
 
         User user = new User()
-                .setEmail("green" + i + "@email.com")
+                .setEmail("green@email.com")
                 .setPassword("");
 
         app.getHelperUser().openLogRegForm();
@@ -97,5 +89,19 @@ public class Registration extends TestBase {
         app.getHelperUser().submitReg();
 
         Assert.assertTrue(app.getHelperUser().isAlertPresent("Wrong email or password format"));
+    }
+
+    @Test
+    public void regExistingUser() {
+
+        User user = new User()
+                .setEmail("green@email.com")
+                .setPassword("Green123456!");
+
+        app.getHelperUser().openLogRegForm();
+        app.getHelperUser().fillLogRegForm(user);
+        app.getHelperUser().submitReg();
+
+        Assert.assertTrue(app.getHelperUser().isAlertPresent("User already exist"));
     }
 }
