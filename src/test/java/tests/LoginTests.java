@@ -15,12 +15,17 @@ public class LoginTests extends TestBase {
         if (app.getHelperUser().isLogged()) // if is logged true - then do log out
             app.getHelperUser().logout();
 
+        logger.info("Before method - logout performed");
+
 
     }
     @Test
     public void loginSuccess() {
+        logger.info("Start - name 'loginSuccess'");
+
         app.getHelperUser().openLogRegForm();
         app.getHelperUser().fillLogRegForm("leya@bach.com", "leyaBach9!");
+       logger.info("Test data---> email: 'leya@bach.com' & password: 'leyaBach9!'");
         app.getHelperUser().submitLogin();
 
         //Assert
@@ -30,6 +35,8 @@ public class LoginTests extends TestBase {
 //        Assert.assertFalse();
 
         Assert.assertTrue(app.getHelperUser().isLogged());
+
+        logger.info("Assert check is element button 'Sign out' present");
 
         try {
             Thread.sleep(4000);
@@ -62,27 +69,32 @@ public class LoginTests extends TestBase {
     public void loginWrongEmail(){
         app.getHelperUser().openLogRegForm();
         app.getHelperUser().fillLogRegForm("leyabach.com", "leyaBach9!");
+        logger.info("Test data---> email: 'leyabach.com' & password: 'leyaBach9!'");
         app.getHelperUser().submitLogin();
 
         Assert.assertTrue(app.getHelperUser().isAlertPresent("Wrong email or password"));
-
+        logger.info("Assert check is alert present with error text 'Wrong email or password'");
     }
     @Test
     public void loginWrongPass(){
         app.getHelperUser().openLogRegForm();
         app.getHelperUser().fillLogRegForm("leya@bach.com", "leyaBach!");
+        logger.info("Test data---> email: 'leya@bach.com' & password: 'leyaBach!'");
         app.getHelperUser().submitLogin();
 
         Assert.assertTrue(app.getHelperUser().isAlertPresent("Wrong email or password"));
-
+        logger.info("Assert check is alert present with error text 'Wrong email or password'");
     }
     @Test
     public void loginUnregedUser(){
         app.getHelperUser().openLogRegForm();
         app.getHelperUser().fillLogRegForm("unreg@bach.com", "leyaBach9!");
+        logger.info("Test data---> email: 'unreg@bach.com' & password: 'leyaBach9!'");
         app.getHelperUser().submitLogin();
 
         Assert.assertTrue(app.getHelperUser().isAlertPresent("Wrong email or password"));
+        logger.info("Assert check is alert present with error text 'Wrong email or password'");
+
     }
 
 
