@@ -2,6 +2,8 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +28,9 @@ public class ApplicationManager {
 
         helperUser = new HelperUser(wd);
         helperContact = new HelperContact(wd);
+
+        WebDriverListener webDriverListener = new WDListener();
+        wd = new EventFiringDecorator(webDriverListener).decorate(wd);
     }
 
     public HelperUser getHelperUser() { //generate-> getter-> helperUser
