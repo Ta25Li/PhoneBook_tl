@@ -23,14 +23,17 @@ public class ApplicationManager {
 
         wd.manage().window().maximize();
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        WebDriverListener webDriverListener = new WDListener();
+        wd = new EventFiringDecorator(webDriverListener).decorate(wd);
+
         wd.navigate().to("https://telranedu.web.app/home");
         logger.info("The link--->"+ wd.getCurrentUrl());
 
         helperUser = new HelperUser(wd);
         helperContact = new HelperContact(wd);
 
-        WebDriverListener webDriverListener = new WDListener();
-        wd = new EventFiringDecorator(webDriverListener).decorate(wd);
+
     }
 
     public HelperUser getHelperUser() { //generate-> getter-> helperUser
