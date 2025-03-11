@@ -1,5 +1,6 @@
 package tests;
 
+import manager.DataProviderContact;
 import models.Contact;
 import models.User;
 import org.testng.Assert;
@@ -18,19 +19,19 @@ public class AddNewContact extends TestBase {
         }
     }
 
-    @Test
-    public void addContactSuccessAllFields() {
+    @Test (dataProvider = "contactSuccess",dataProviderClass = DataProviderContact.class)
+    public void addContactSuccessAllFields(Contact contact) {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
 
-        Contact contact = Contact.builder()
-                .name("Axl" + i)
-                .lastName("Mclane")
-                .phone("1234567" + i)
-                .email("email" + i + "@email.com")
-                .address("San Fransisco, Green str 1")
-                .description("all fields")
-
-                .build();
+//        Contact contact = Contact.builder()
+//                .name("Axl" + i)
+//                .lastName("Mclane")
+//                .phone("1234567" + i)
+//                .email("email" + i + "@email.com")
+//                .address("San Fransisco, Green str 1")
+//                .description("all fields")
+//
+//                .build();
 
         app.getHelperContact().openContactForm();
         app.getHelperContact().fillContactForm(contact);
@@ -48,7 +49,7 @@ public class AddNewContact extends TestBase {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
 
         Contact contact = Contact.builder()
-                .name("Jao_Req_Fields" + i)
+                .name("Jao__Req_Fields" + i)
                 .lastName("Mclane")
                 .phone("654321" + i)
                 .email("email" + i + "@email.com")
@@ -126,17 +127,17 @@ public class AddNewContact extends TestBase {
         Assert.assertTrue(app.getHelperContact().isAddPageStillDisplayed());
     }
 
-    @Test
-    public void wrongPhone() {
-        Contact contact = Contact.builder()
-                .name("Jane")
-                .lastName("Mclane")
-                .phone("")
-                .email("email@email.com")
-                .address("San Fransisco, Green str 1")
-                .description("wrong phone")
-
-                .build();
+    @Test (dataProvider = "contactWrongPhone",dataProviderClass = DataProviderContact.class)
+    public void wrongPhone(Contact contact) {
+//        Contact contact = Contact.builder()
+//                .name("Jane")
+//                .lastName("Mclane")
+//                .phone("")
+//                .email("email@email.com")
+//                .address("San Fransisco, Green str 1")
+//                .description("wrong phone")
+//
+//                .build();
         app.getHelperContact().openContactForm();
         app.getHelperContact().fillContactForm(contact);
         //   app.getHelperContact().pause(5000);

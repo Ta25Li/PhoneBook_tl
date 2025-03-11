@@ -40,4 +40,13 @@ public class DataProviderUser {
         return list.iterator();
     }
 
+    @DataProvider
+    public Iterator<Object[]> loginFile() {
+        List<Object[]> list = new ArrayList<>();
+
+
+        return list.iterator();
+    }
+
+
 }
