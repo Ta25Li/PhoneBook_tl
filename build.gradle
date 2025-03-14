@@ -29,3 +29,10 @@ dependencies {
 test {
     useTestNG()
 }
+
+//when start, which tests, which browser
+task qa(type:Test){
+    useTestNG(){
+        suites 'src/test/resources/testng.xml'
+    }
+}
