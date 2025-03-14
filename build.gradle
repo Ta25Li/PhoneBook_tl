@@ -54,3 +54,26 @@ task qa(type:Test){
 
     }
 }
+task scope (type:Test){
+    useTestNG(){
+        suites 'src/test/resources/scope.xml'
+
+    }
+}
+
+task team (type:Test){ //из консоли говорить какую группу запускать - smoke, retest, regress
+    useTestNG(){
+        def groups = System.getProperty('groups')
+        if (groups != null) {
+            includeGroups groups
+        }
+        suites 'src/test/resources/base.xml'
+    }
+//.\gradlew clean -Dgroups=smoke team
+    //.\gradlew clean -Dgroups=retest team
+}
+
+
+
+
+

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class LoginTests extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void preCondition(){
         //if SignOut present --> logout
         if (app.getHelperUser().isLogged()) // if is logged true - then do log out
@@ -53,7 +53,7 @@ public class LoginTests extends TestBase {
     }
 
 
-    @Test
+    @Test (groups = {"smoke"})
     public void loginSuccess1 (){
         User user = new User().setEmail("leya@bach.com").setPassword("leyaBach9!");
 
@@ -108,7 +108,7 @@ public class LoginTests extends TestBase {
 
 
   //  =============================== Negative =================
-    @Test
+    @Test (groups = {"smoke"})
     public void loginWrongEmail(){
         app.getHelperUser().openLogRegForm();
         app.getHelperUser().fillLogRegForm("leyabach.com", "leyaBach9!");

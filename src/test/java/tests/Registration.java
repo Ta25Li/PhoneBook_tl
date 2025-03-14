@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Registration extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void preCondition() {
         if (app.getHelperUser().isLogged())
             app.getHelperUser().logout();
@@ -35,7 +35,7 @@ public class Registration extends TestBase {
 
     }
 //=============== negative ====================
-    @Test
+    @Test (groups = {"smoke"})
     //@Test (description = "Bug report 12345",enabled=false)   <---- to make method invisible while
     // waiting for bug resolution
 

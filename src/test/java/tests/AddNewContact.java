@@ -11,7 +11,7 @@ import java.util.ConcurrentModificationException;
 
 public class AddNewContact extends TestBase {
 
-    @BeforeClass
+    @BeforeClass (alwaysRun = true)
     public void preCondition() { // login 1 time to perform all the test
         if (!app.getHelperUser().isLogged()) {
             app.getHelperUser().login(new User()
@@ -59,14 +59,14 @@ public class AddNewContact extends TestBase {
         Assert.assertTrue(app.getHelperContact().isContactAddedByPhone(contact.getPhone()));
     }
 
-    @Test
+    @Test (groups = {"smoke","retest"})
     public void addContactSuccessReq() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
 
         Contact contact = Contact.builder()
                 .name("Jao__Req_Fields" + i)
                 .lastName("Mclane")
-                .phone("654321" + i)
+                .phone("6543211" + i)
                 .email("email" + i + "@email.com")
                 .address("San Fransisco, Green str 1")
 
@@ -103,7 +103,7 @@ public class AddNewContact extends TestBase {
         Assert.assertTrue(app.getHelperContact().isAddPageStillDisplayed());
     }
 
-    @Test
+    @Test (groups = {"smoke"})
     public void wrongLastName() {
         Contact contact = Contact.builder()
                 .name("Jao")

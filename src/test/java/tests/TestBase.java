@@ -18,7 +18,8 @@ import java.lang.reflect.Method;
 public class TestBase {
 
    Logger logger = LoggerFactory.getLogger(TestBase.class);
-   @BeforeMethod
+
+   @BeforeMethod (alwaysRun = true)
    public void startLogger(Method m){
       logger.info("Name of method--->" +m.getName());
    }
@@ -27,7 +28,7 @@ public class TestBase {
            System.getProperty("browser", Browser.CHROME.browserName()));
 //по умолчанию Хром, если из консоли не передали другой браузер
 
-   @BeforeSuite
+   @BeforeSuite (alwaysRun = true)
    public void setUp(){
       app.init();
    }
