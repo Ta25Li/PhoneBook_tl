@@ -26,13 +26,31 @@ dependencies {
 
 }
 
-test {
+test { // .\gradlew clean test <-- run all test in default browser
     useTestNG()
 }
 
 //when start, which tests, which browser
 task qa(type:Test){
     useTestNG(){
-        suites 'src/test/resources/testng.xml'
+
+        def suite = System.getProperty('suite', '')
+
+        if (suite.equals('quick')) { //smoke test for example
+            suites 'src/test/resources/quick.xml'
+        } else if (suite.equals('login')) {
+            suites 'src/test/resources/login.xml'
+        } else {
+            suites 'src/test/resources/testng.xml'
+        }
+        // .\gradlew clean -Dsuite='login' qa <--- Terminal
+        // .\gradlew clean -Dsuite='login' -Pbrowser=firefox qa
+
+    }
+    if(project.hasProperty('browser')){ //if need from different browsers
+        systemProperty 'browser',
+
+                "${browser}"
+
     }
 }
